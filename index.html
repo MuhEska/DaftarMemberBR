@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Member Brebes Roblox</title>
+    <style>
+        /* --- RESET & BASIC STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c20 0%, #1a103c 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* --- CONTAINER FORM --- */
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* --- HEADER & LOGO --- */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #5865F2;
+            margin-bottom: 12px;
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+        }
+
+        .header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #b9bbbe;
+            margin-top: 5px;
+        }
+
+        /* --- FORM ELEMENTS --- */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #dcddde;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid #4f545c;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #5865F2;
+            box-shadow: 0 0 8px rgba(88, 101, 242, 0.6);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-submit, .btn-next {
+            width: 100%;
+            padding: 14px;
+            background-color: #5865F2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .btn-submit:hover, .btn-next:hover {
+            background-color: #4752C4;
+        }
+
+        .btn-submit:active, .btn-next:active {
+            transform: scale(0.98);
+        }
+
+        .btn-submit:disabled {
+            background-color: #747f8d;
+            cursor: not-allowed;
+        }
+
+        /* --- RESULT BOXES --- */
+        .result-box {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        /* INSTRUCTION BOX */
+        .instruction-box h3 {
+            color: #FEE75C;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .notice-card {
+            background: rgba(254, 231, 92, 0.1);
+            border: 1px dashed #FEE75C;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0 20px 0;
+            color: #ffffff;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* SUCCESS STATE */
+        .success-box h3 {
+            color: #57F287;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        /* REJECTED STATE */
+        .rejected-box h3 {
+            color: #ED4245;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .result-box p {
+            color: #dcddde;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn-discord {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            background-color: #5865F2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-discord:hover {
+            background-color: #4752C4;
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER FORM -->
+        <div class="header">
+            <!-- Ganti URL gambar di bawah dengan Logo Brebes Roblox Kamu -->
+            <img src="BR.png" alt="Logo Brebes Roblox" class="logo">
+            <h2>BREBES ROBLOX</h2>
+            <p>Formulir Pendaftaran Member Resmi</p>
+        </div>
+
+        <!-- FORM INPUT -->
+        <form id="memberForm">
+            <div class="form-group">
+                <label for="nama">Nama Lengkap *</label>
+                <input type="text" id="nama" placeholder="Masukkan nama kamu" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Aktif *</label>
+                <input type="email" id="email" placeholder="contoh: nama@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username Roblox *</label>
+                <input type="text" id="username" placeholder="Contoh: BrebesGamer123" required>
+            </div>
+
+            <div class="form-group">
+                <label for="usia">Usia (Tahun) *</label>
+                <input type="number" id="usia" min="1" max="99" placeholder="Masukkkan Usia" required>
+            </div>
+
+            <div class="form-group">
+                <label for="alamat">Alamat / Asal Kota *</label>
+                <input type="text" id="alamat" placeholder="Contoh: Bulakamba, Brebes" required>
+            </div>
+
+            <div class="form-group">
+                <label for="alasan">Alasan Join *</label>
+                <textarea id="alasan" placeholder="Mengapa kamu ingin bergabung di Brebes Roblox?" required></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn-submit">KIRIM PENDAFTARAN</button>
+        </form>
+
+        <!-- RESULT 1: INSTRUKSI SEBELUM JOIN DISCORD -->
+        <div id="instructionBox" class="result-box instruction-box">
+            <h3>⚠️ Wajib Dibaca!</h3>
+            <div class="notice-card">
+                📌 <strong>Setelah Join Harap langsung perkenalan di channel intro</strong>
+            </div>
+            <button id="btnNext" class="btn-next">SELANJUTNYA ➔</button>
+        </div>
+
+        <!-- RESULT 2: LINK DISCORD (SETELAH KLIK SELANJUTNYA) -->
+        <div id="successBox" class="result-box success-box">
+            <h3>🎉 Pendaftaran Berhasil!</h3>
+            <p>Silakan klik tombol di bawah untuk bergabung ke Server Discord resmi Brebes Roblox.</p>
+            <!-- Ganti link Discord di bawah dengan link Discord kamu -->
+            <a href="https://discord.gg/qXpPg9xPy6" target="_blank" class="btn-discord">
+                🚀 MASUK DISCORD BREBES ROBLOX
+            </a>
+        </div>
+
+        <!-- RESULT 3: PENOLAKAN (DIBAWAH UMUR) -->
+        <div id="rejectedBox" class="result-box rejected-box">
+            <h3>❌ Mohon Maaf, Kamu Belum Cukup Umur</h3>
+            <p>Pendaftaran dibatalkan. Komunitas Brebes Roblox khusus untuk member berumur <strong>17 tahun ke atas</strong>.</p>
+        </div>
+
+        <!-- RESULT 4: SUDAH PERNAH MENGISI -->
+        <div id="alreadyFilledBox" class="result-box rejected-box">
+            <h3>⚠️ Akses Dibatasi</h3>
+            <p>Kamu sudah pernah melakukan pengisian formulir pendaftaran ini sebelumnya dari perangkat ini.</p>
+        </div>
+    </div>
+
+    <script>
+        // === KONFIGURASI WEBHOOK DISCORD ===
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1534099182778843236/Lqe1fiWbRBTS-YQPyUTH0ypy0G0XWjxtqFHDJ5xsQK9iMLEtOwapJU0yTHwrpfFdpm-K";
+
+        const form = document.getElementById('memberForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const instructionBox = document.getElementById('instructionBox');
+        const btnNext = document.getElementById('btnNext');
+        const successBox = document.getElementById('successBox');
+        const rejectedBox = document.getElementById('rejectedBox');
+        const alreadyFilledBox = document.getElementById('alreadyFilledBox');
+
+        // PERIKSA APABILA PENGGUNA SUDAH PERNAH MENGISI SEBELUMNYA
+        window.addEventListener('DOMContentLoaded', () => {
+            const hasSubmitted = localStorage.getItem('brebes_roblox_submitted');
+            if (hasSubmitted) {
+                form.style.display = "none";
+                alreadyFilledBox.style.display = "block";
+            }
+        });
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const nama = document.getElementById('nama').value;
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const usia = parseInt(document.getElementById('usia').value, 10);
+            const alamat = document.getElementById('alamat').value;
+            const alasan = document.getElementById('alasan').value;
+
+            // Sembunyikan form dan tandai bahwa user sudah pernah mengisi
+            form.style.display = "none";
+            localStorage.setItem('brebes_roblox_submitted', 'true');
+
+            // --- CEK VALIDASI UMUR (< 17 TAHUN) ---
+            if (usia < 17) {
+                rejectedBox.style.display = "block";
+                return;
+            }
+
+            // --- JIKA USIA >= 17 TAHUN, PROSES KIRIM KE DISCORD ---
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Mengirim...";
+
+            const discordPayload = {
+                embeds: [{
+                    title: "📥 Pendaftaran Member Baru Brebes Roblox",
+                    color: 5793266, // Hijau
+                    fields: [
+                        { name: "👤 Nama", value: nama, inline: true },
+                        { name: "📧 Email", value: email, inline: true },
+                        { name: "🎮 Username Roblox", value: username, inline: true },
+                        { name: "🎂 Usia", value: `${usia} Tahun`, inline: true },
+                        { name: "🏠 Alamat", value: alamat, inline: false },
+                        { name: "📝 Alasan Join", value: alasan, inline: false }
+                    ],
+                    timestamp: new Date().toISOString(),
+                    footer: { text: "Brebes Roblox Community System" }
+                }]
+            };
+
+            try {
+                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(discordPayload)
+                });
+
+                if (response.ok) {
+                    // Tampilkan kotak instruksi terlebih dahulu
+                    instructionBox.style.display = "block";
+                } else {
+                    alert("Gagal mengirim data. Pastikan Webhook URL terpasang dengan benar!");
+                    form.style.display = "block";
+                    localStorage.removeItem('brebes_roblox_submitted');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "KIRIM PENDAFTARAN";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Terjadi kesalahan jaringan.");
+                form.style.display = "block";
+                localStorage.removeItem('brebes_roblox_submitted');
+                submitBtn.disabled = false;
+                submitBtn.innerText = "KIRIM PENDAFTARAN";
+            }
+        });
+
+        // AKSI TOMBOL "SELANJUTNYA" UNTUK MEMBUKA LINK DISCORD
+        btnNext.addEventListener('click', function() {
+            instructionBox.style.display = "none";
+            successBox.style.display = "block";
+        });
+    </script>
+</body>
+</html>
