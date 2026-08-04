@@ -4,266 +4,374 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pendaftaran Member Brebes Roblox</title>
+    <!-- Fonts Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- RESET & BASIC STYLES --- */
+        /* --- CORE SYSTEM & RESET --- */
+        :root {
+            --bg-main: #060913;
+            --card-bg: rgba(13, 18, 36, 0.75);
+            --primary-glow: #6366f1;
+            --accent-cyan: #06b6d4;
+            --accent-magenta: #d946ef;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(99, 102, 241, 0.25);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 60%, #020617 100%);
-            color: #f8fafc;
+            background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(217, 70, 239, 0.08) 0%, transparent 60%);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 24px 16px;
+            padding: 30px 16px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Background Grid Effect */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* --- CONTAINER FORM --- */
         .container {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.125);
-            border-radius: 20px;
-            padding: 36px 28px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 40px 32px;
             width: 100%;
-            max-width: 500px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.6s ease-out;
+            max-width: 520px;
+            box-shadow: 
+                0 0 50px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(99, 102, 241, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            animation: containerAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Top Cyberpunk Glow Line */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--primary-glow), var(--accent-magenta), transparent);
+            border-radius: 2px;
         }
 
         /* --- HEADER & LOGO --- */
         .header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
+        }
+
+        .logo-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 16px;
         }
 
         .logo {
-            width: 90px;
-            height: 90px;
+            width: 96px;
+            height: 96px;
             object-fit: cover;
             border-radius: 50%;
-            border: 3px solid #6366f1;
-            margin-bottom: 12px;
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.4s ease;
+        }
+
+        .logo-glow {
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-magenta));
+            border-radius: 50%;
+            filter: blur(12px);
+            opacity: 0.6;
+            z-index: 1;
+            animation: pulseGlow 4s infinite alternate;
         }
 
         .header h2 {
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: #ffffff;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+            font-family: 'Outfit', sans-serif;
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
         }
 
         .header p {
-            font-size: 14px;
-            color: #94a3b8;
+            font-size: 13px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
             margin-top: 4px;
+            font-weight: 500;
         }
 
-        /* --- HONESTY WARNING BOX --- */
+        /* --- WARNING BOX --- */
         .warning-honesty {
-            background: rgba(245, 158, 11, 0.1);
-            border-left: 4px solid #f59e0b;
-            border-radius: 8px;
-            padding: 12px 16px;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: 14px;
+            padding: 14px 16px;
             margin-bottom: 24px;
-            font-size: 13px;
+            font-size: 12.5px;
             color: #fde68a;
             line-height: 1.5;
+            position: relative;
+            overflow: hidden;
         }
 
         .warning-honesty strong {
             color: #fbbf24;
-            display: block;
-            margin-bottom: 2px;
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+            font-size: 13.5px;
+            font-family: 'Outfit', sans-serif;
         }
 
         /* --- FORM ELEMENTS --- */
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #cbd5e1;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         .form-group label span.required {
             color: #f43f5e;
         }
 
+        .input-wrapper {
+            position: relative;
+        }
+
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px 16px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 10px;
+            padding: 14px 16px;
+            background: rgba(6, 9, 19, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             color: #ffffff;
             font-size: 14px;
             outline: none;
-            transition: all 0.25s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: #64748b;
+            color: #475569;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
-            border-color: #6366f1;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
-            background: rgba(15, 23, 42, 0.8);
+            border-color: var(--accent-cyan);
+            box-shadow: 
+                0 0 0 3px rgba(6, 182, 212, 0.15),
+                0 0 15px rgba(6, 182, 212, 0.2);
+            background: rgba(6, 9, 19, 0.85);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 90px;
+            min-height: 95px;
         }
 
-        /* --- CHECKBOX AGREE --- */
+        /* --- CHECKBOX --- */
         .checkbox-group {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
-            margin: 20px 0;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 12px;
-            border-radius: 8px;
+            gap: 12px;
+            margin: 24px 0;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 14px;
+            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .checkbox-group input[type="checkbox"] {
-            margin-top: 3px;
-            width: 16px;
-            height: 16px;
-            accent-color: #6366f1;
+            margin-top: 2px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-cyan);
             cursor: pointer;
+            border-radius: 4px;
         }
 
         .checkbox-group label {
             font-size: 12px;
-            color: #94a3b8;
-            line-height: 1.4;
+            color: var(--text-muted);
+            line-height: 1.5;
             cursor: pointer;
+            user-select: none;
+        }
+
+        .checkbox-group label strong {
+            color: #e2e8f0;
         }
 
         /* --- BUTTONS --- */
         .btn-submit, .btn-next {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-glow) 0%, #4338ca 100%);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
             font-size: 15px;
             font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-submit:hover:not(:disabled), .btn-next:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
-        }
-
-        .btn-submit:active:not(:disabled), .btn-next:active {
-            transform: translateY(0);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
+            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
         }
 
         .btn-submit:disabled {
-            background: #334155;
-            color: #64748b;
+            background: #1e293b;
+            color: #475569;
             box-shadow: none;
             cursor: not-allowed;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* --- RESULT BOXES --- */
         .result-box {
             display: none;
             text-align: center;
-            animation: fadeIn 0.4s ease-in-out forwards;
-        }
-
-        /* INSTRUCTION BOX */
-        .instruction-box h3 {
-            color: #f59e0b;
-            margin-bottom: 12px;
-            font-size: 20px;
+            animation: fadeIn 0.5s ease forwards;
         }
 
         .notice-card {
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px dashed #f59e0b;
-            border-radius: 10px;
-            padding: 16px;
-            margin: 16px 0 24px 0;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px dashed rgba(245, 158, 11, 0.4);
+            border-radius: 14px;
+            padding: 18px;
+            margin: 20px 0 28px 0;
             color: #ffffff;
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
-        /* SUCCESS STATE */
-        .success-box h3 {
-            color: #10b981;
-            margin-bottom: 10px;
+        .instruction-box h3 {
+            font-family: 'Outfit', sans-serif;
+            color: #fbbf24;
+            margin-bottom: 12px;
             font-size: 22px;
         }
 
-        /* REJECTED STATE */
+        .success-box h3 {
+            font-family: 'Outfit', sans-serif;
+            color: #34d399;
+            margin-bottom: 12px;
+            font-size: 24px;
+        }
+
         .rejected-box h3 {
+            font-family: 'Outfit', sans-serif;
             color: #f43f5e;
-            margin-bottom: 10px;
-            font-size: 20px;
+            margin-bottom: 12px;
+            font-size: 22px;
         }
 
         .result-box p {
-            color: #cbd5e1;
+            color: var(--text-muted);
             font-size: 14px;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
             line-height: 1.6;
         }
 
         .btn-discord {
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #5865F2 0%, #4752C4 100%);
+            padding: 16px;
+            background: linear-gradient(135deg, #5865F2 0%, #404EED 100%);
             color: white;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
             font-size: 15px;
             font-weight: 700;
-            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4);
             transition: all 0.3s ease;
         }
 
         .btn-discord:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(88, 101, 242, 0.6);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes containerAppear {
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.4; filter: blur(10px); }
+            100% { opacity: 0.8; filter: blur(16px); }
         }
     </style>
 </head>
@@ -272,50 +380,63 @@
     <div class="container">
         <!-- HEADER FORM -->
         <div class="header">
-            <img src="BR.png" alt="Logo Brebes Roblox" class="logo">
-            <h2>BREBES ROBLOX</h2>
+            <div class="logo-wrapper">
+                <div class="logo-glow"></div>
+                <img src="BR.png" alt="Logo Brebes Roblox" class="logo">
+            </div>
+            <h2>Brebes Roblox</h2>
             <p>Formulir Pendaftaran Member Resmi</p>
         </div>
 
         <!-- FORM INPUT -->
         <form id="memberForm">
-            <!-- Peringatan Kejujuran Data -->
             <div class="warning-honesty">
-                <strong>⚠️ Himbauan Kejujuran Data:</strong>
-                Harap isi seluruh data (terutama umur dan username) dengan jujur & akurat. Tim admin akan melakukan verifikasi ulang di Discord. Data palsu dapat mengakibatkan pembatalan pendaftaran.
+                <strong>⚠️ HIMBAUAN KEJUJURAN DATA</strong>
+                Harap isi seluruh data (terutama umur & username) dengan jujur. Tim admin akan memverifikasi di Discord. Data palsu dapat mengakibatkan diskualifikasi.
             </div>
 
             <div class="form-group">
                 <label for="nama">Nama Lengkap <span class="required">*</span></label>
-                <input type="text" id="nama" placeholder="Masukkan nama asli kamu" required>
+                <div class="input-wrapper">
+                    <input type="text" id="nama" placeholder="Masukkan nama asli kamu" required autocomplete="off">
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="email">Email Aktif <span class="required">*</span></label>
-                <input type="email" id="email" placeholder="contoh: nama@gmail.com" required>
+                <div class="input-wrapper">
+                    <input type="email" id="email" placeholder="contoh: nama@gmail.com" required autocomplete="off">
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="username">Username Roblox <span class="required">*</span></label>
-                <input type="text" id="username" placeholder="Contoh: BrebesGamer123" required>
+                <div class="input-wrapper">
+                    <input type="text" id="username" placeholder="Contoh: BrebesGamer123" required autocomplete="off">
+                </div>
             </div>
 
             <div class="form-group">
-                <label for="usia">Usia (Min. 17 Tahun) <span class="required">*</span></label>
-                <input type="number" id="usia" min="1" max="99" placeholder="Masukkan usia kamu saat ini" required>
+                <label for="usia">Usia (Minimal 17 Tahun) <span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <input type="number" id="usia" min="1" max="99" placeholder="Masukkan usia kamu saat ini" required>
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="alamat">Alamat / Asal Kota <span class="required">*</span></label>
-                <input type="text" id="alamat" placeholder="Contoh: Bulakamba, Brebes" required>
+                <div class="input-wrapper">
+                    <input type="text" id="alamat" placeholder="Contoh: Bulakamba, Brebes" required autocomplete="off">
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="alasan">Alasan Join <span class="required">*</span></label>
-                <textarea id="alasan" placeholder="Mengapa kamu berminat bergabung dengan komunitas Brebes Roblox?" required></textarea>
+                <div class="input-wrapper">
+                    <textarea id="alasan" placeholder="Mengapa kamu berminat bergabung dengan komunitas Brebes Roblox?" required></textarea>
+                </div>
             </div>
 
-            <!-- Checkbox Pernyataan Kejujuran -->
             <div class="checkbox-group">
                 <input type="checkbox" id="agreeHonesty" required>
                 <label for="agreeHonesty">Saya menyatakan bahwa data yang saya masukkan adalah <strong>BENAR & JUJUR</strong> serta saya telah berusia <strong>minimal 17 tahun</strong>.</label>
@@ -324,33 +445,33 @@
             <button type="submit" id="submitBtn" class="btn-submit" disabled>KIRIM PENDAFTARAN</button>
         </form>
 
-        <!-- RESULT 1: INSTRUKSI SEBELUM JOIN DISCORD -->
+        <!-- RESULT 1: INSTRUKSI -->
         <div id="instructionBox" class="result-box instruction-box">
-            <h3>⚠️ Wajib Dibaca!</h3>
+            <h3>⚠️ WAJIB DIBACA!</h3>
             <div class="notice-card">
-                📌 <strong>Setelah masuk server, harap langsung melakukan perkenalan di channel #intro.</strong>
+                📌 <strong>Setelah masuk server, harap langsung melakukan perkenalan di channel <span style="color: var(--accent-cyan);">#intro</span>.</strong>
             </div>
             <button id="btnNext" class="btn-next">SELANJUTNYA ➔</button>
         </div>
 
-        <!-- RESULT 2: LINK DISCORD -->
+        <!-- RESULT 2: SUCCESS LINK DISCORD -->
         <div id="successBox" class="result-box success-box">
-            <h3>🎉 Pendaftaran Berhasil!</h3>
+            <h3>🎉 PENDAFTARAN BERHASIL!</h3>
             <p>Silakan klik tombol di bawah untuk bergabung ke Server Discord resmi Brebes Roblox.</p>
             <a href="https://discord.gg/qXpPg9xPy6" target="_blank" rel="noopener noreferrer" class="btn-discord">
                 🚀 MASUK DISCORD BREBES ROBLOX
             </a>
         </div>
 
-        <!-- RESULT 3: PENOLAKAN (DIBAWAH UMUR) -->
+        <!-- RESULT 3: REJECTED -->
         <div id="rejectedBox" class="result-box rejected-box">
-            <h3>❌ Mohon Maaf, Pendaftaran Ditolak</h3>
-            <p>Pendaftaran dibatalkan. Komunitas Brebes Roblox khusus diperuntukkan bagi member yang berusia <strong>17 tahun ke atas</strong>.</p>
+            <h3>❌ PENDAFTARAN DITOLAK</h3>
+            <p>Mohon maaf, Komunitas Brebes Roblox khusus diperuntukkan bagi member yang berusia <strong>17 tahun ke atas</strong>.</p>
         </div>
 
-        <!-- RESULT 4: SUDAH PERNAH MENGISI -->
+        <!-- RESULT 4: ALREADY FILLED -->
         <div id="alreadyFilledBox" class="result-box rejected-box">
-            <h3>⚠️ Akses Dibatasi</h3>
+            <h3>⚠️ AKSES DIBATASI</h3>
             <p>Kamu sudah pernah mengirimkan formulir pendaftaran ini sebelumnya dari perangkat yang sama.</p>
         </div>
     </div>
@@ -367,12 +488,12 @@
         const rejectedBox = document.getElementById('rejectedBox');
         const alreadyFilledBox = document.getElementById('alreadyFilledBox');
 
-        // Kontrol Tombol Kirim berdasarkan Checkbox
+        // Toggle submit button state
         agreeCheckbox.addEventListener('change', function() {
             submitBtn.disabled = !this.checked;
         });
 
-        // Periksa jika sudah pernah submit
+        // Check submission history
         window.addEventListener('DOMContentLoaded', () => {
             const hasSubmitted = localStorage.getItem('brebes_roblox_submitted');
             if (hasSubmitted) {
@@ -391,7 +512,6 @@
             const alamat = document.getElementById('alamat').value;
             const alasan = document.getElementById('alasan').value;
 
-            // Cek usia (< 17 tahun)
             if (usia < 17) {
                 form.style.display = "none";
                 localStorage.setItem('brebes_roblox_submitted', 'true');
@@ -400,12 +520,12 @@
             }
 
             submitBtn.disabled = true;
-            submitBtn.innerText = "Mengirim...";
+            submitBtn.innerText = "MENGIRIM...";
 
             const discordPayload = {
                 embeds: [{
                     title: "📥 Pendaftaran Member Baru Brebes Roblox",
-                    color: 5793266,
+                    color: 6500337,
                     fields: [
                         { name: "👤 Nama", value: nama, inline: true },
                         { name: "📧 Email", value: email, inline: true },
@@ -431,7 +551,7 @@
                     localStorage.setItem('brebes_roblox_submitted', 'true');
                     instructionBox.style.display = "block";
                 } else {
-                    alert("Gagal mengirim data. Pastikan Webhook URL terpasang dengan benar!");
+                    alert("Gagal mengirim data. Silakan coba lagi!");
                     submitBtn.disabled = false;
                     submitBtn.innerText = "KIRIM PENDAFTARAN";
                 }
