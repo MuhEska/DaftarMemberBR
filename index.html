@@ -410,6 +410,13 @@
             </div>
 
             <div class="form-group">
+                <label for="discordUsername">Username Discord <span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <input type="text" id="discordUsername" placeholder="Contoh: username_discord / username#1234" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="username">Username Roblox <span class="required">*</span></label>
                 <div class="input-wrapper">
                     <input type="text" id="username" placeholder="Contoh: BrebesGamer123" required autocomplete="off">
@@ -507,6 +514,7 @@
 
             const nama = document.getElementById('nama').value;
             const email = document.getElementById('email').value;
+            const discordUsername = document.getElementById('discordUsername').value;
             const username = document.getElementById('username').value;
             const usia = parseInt(document.getElementById('usia').value, 10);
             const alamat = document.getElementById('alamat').value;
@@ -529,6 +537,7 @@
                     fields: [
                         { name: "👤 Nama", value: nama, inline: true },
                         { name: "📧 Email", value: email, inline: true },
+                        { name: "💬 Username Discord", value: discordUsername, inline: true },
                         { name: "🎮 Username Roblox", value: username, inline: true },
                         { name: "🎂 Usia", value: `${usia} Tahun`, inline: true },
                         { name: "🏠 Alamat", value: alamat, inline: false },
