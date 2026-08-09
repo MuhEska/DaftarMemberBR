@@ -485,6 +485,9 @@
 
     <script>
         const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1534099182778843236/Lqe1fiWbRBTS-YQPyUTH0ypy0G0XWjxtqFHDJ5xsQK9iMLEtOwapJU0yTHwrpfFdpm-K";
+        
+        // PASTE URL GOOGLE APPS SCRIPT KAMU DI SINI:
+        const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzaL1DwnIhs9Jhlfs9fvrGAfvilKs-0uHHcMGW7KBlmj0whPZyb6UC1wSj5STmNwE6cvg/exec";
 
         const form = document.getElementById('memberForm');
         const submitBtn = document.getElementById('submitBtn');
@@ -530,6 +533,9 @@
             submitBtn.disabled = true;
             submitBtn.innerText = "MENGIRIM...";
 
+            const formDataRaw = { nama, email, discordUsername, username, usia, alamat, alasan };
+
+            // 1. Payload untuk Discord Webhook
             const discordPayload = {
                 embeds: [{
                     title: "📥 Pendaftaran Member Baru Brebes Roblox",
@@ -549,18 +555,28 @@
             };
 
             try {
-                const response = await fetch(DISCORD_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(discordPayload)
-                });
+                // Kirim data ke Discord & Google Sheets secara bersamaan (Parallel)
+                const [discordRes] = await Promise.all([
+                    fetch(DISCORD_WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(discordPayload)
+                    }),
+                    // Mode 'no-cors' digunakan agar Google Apps Script tidak terblokir CORS di browser
+                    fetch(GOOGLE_SHEETS_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: JSON.stringify(formDataRaw)
+                    })
+                ]);
 
-                if (response.ok) {
+                if (discordRes.ok) {
                     form.style.display = "none";
                     localStorage.setItem('brebes_roblox_submitted', 'true');
                     instructionBox.style.display = "block";
                 } else {
-                    alert("Gagal mengirim data. Silakan coba lagi!");
+                    alert("Gagal mengirim data ke Discord. Silakan coba lagi!");
                     submitBtn.disabled = false;
                     submitBtn.innerText = "KIRIM PENDAFTARAN";
                 }
