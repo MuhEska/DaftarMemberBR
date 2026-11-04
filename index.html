@@ -151,7 +151,9 @@ input:focus,textarea:focus{border-color:rgba(98,229,237,.65);background:rgba(5,1
   </div>
 </main>
 <script>
-const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwKu37TVDYdVhtBZACzIpCWxk52JqEReKdf7LwxXd5_eP7OJRkMvZxD3mhcXR3_BmxO/exec";
+// Ganti dengan URL /exec Apps Script kamu setelah di-deploy
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBgDso-bPDP1kwmx327n6sVF8l9_PHJWoepLJgR3JETbbp8hBNbkOLMsHlyH_EP3W4/exec";
+
 const form = document.getElementById("memberForm");
 const submitBtn = document.getElementById("submitBtn");
 const statusBox = document.getElementById("status");
@@ -175,11 +177,13 @@ document.getElementById("btnNext").addEventListener("click", () => showOnly(succ
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!form.reportValidity()) return;
+  
   const usia = Number(document.getElementById("usia").value);
   if (!Number.isInteger(usia) || usia < 17 || usia > 99) {
     showOnly(rejectedBox);
     return;
   }
+  
   const payload = {
     nama: document.getElementById("nama").value.trim(),
     email: document.getElementById("email").value.trim(),
@@ -190,20 +194,35 @@ form.addEventListener("submit", async (event) => {
     alasan: document.getElementById("alasan").value.trim(),
     website: document.getElementById("website").value
   };
+  
   submitBtn.disabled = true;
   submitBtn.textContent = "MENGIRIM PENDAFTARAN...";
   showStatus("Mengirim data pendaftaran. Jangan tutup halaman ini dulu.", "info");
+  
   try {
-    await fetch(GOOGLE_APPS_SCRIPT_URL, {
+    const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
       method: "POST",
-      mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
     });
-    showOnly(instructionBox);
+    
+    const result = await response.json();
+    
+    if (result.ok) {
+      showOnly(instructionBox);
+    } else {
+      let errorMsg = "Pendaftaran gagal diproses.";
+      if (result.message === "Duplicate submission") errorMsg = "Kamu sudah pernah mendaftar dengan email/username Roblox tersebut dalam 24 jam terakhir.";
+      else if (result.message === "Daily limit reached") errorMsg = "Maaf, kuota pendaftaran harian sudah penuh. Coba lagi besok.";
+      else if (result.message) errorMsg = "Gagal: " + result.message;
+      
+      showStatus(errorMsg, "error");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "KIRIM PENDAFTARAN ↗";
+    }
   } catch (error) {
     console.error("Submission network error:", error);
-    showStatus("Koneksi gagal. Periksa internet lalu coba kembali. Jika masalah berlanjut, hubungi admin.", "error");
+    showStatus("Koneksi gagal. Periksa jaringan internet lalu coba kembali.", "error");
     submitBtn.disabled = false;
     submitBtn.textContent = "KIRIM PENDAFTARAN ↗";
   }
