@@ -1,596 +1,177 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pendaftaran Member Brebes Roblox</title>
-    <!-- Fonts Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- CORE SYSTEM & RESET --- */
-        :root {
-            --bg-main: #060913;
-            --card-bg: rgba(13, 18, 36, 0.75);
-            --primary-glow: #6366f1;
-            --accent-cyan: #06b6d4;
-            --accent-magenta: #d946ef;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glow: rgba(99, 102, 241, 0.25);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(217, 70, 239, 0.08) 0%, transparent 60%);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 16px;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Ambient Background Grid Effect */
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* --- CONTAINER FORM --- */
-        .container {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-glow);
-            border-radius: 24px;
-            padding: 40px 32px;
-            width: 100%;
-            max-width: 520px;
-            box-shadow: 
-                0 0 50px rgba(0, 0, 0, 0.8),
-                0 0 20px rgba(99, 102, 241, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            position: relative;
-            animation: containerAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Top Cyberpunk Glow Line */
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 15%;
-            right: 15%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--primary-glow), var(--accent-magenta), transparent);
-            border-radius: 2px;
-        }
-
-        /* --- HEADER & LOGO --- */
-        .header {
-            text-align: center;
-            margin-bottom: 28px;
-        }
-
-        .logo-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 16px;
-        }
-
-        .logo {
-            width: 96px;
-            height: 96px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 2;
-            transition: transform 0.4s ease;
-        }
-
-        .logo-glow {
-            position: absolute;
-            inset: -4px;
-            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-magenta));
-            border-radius: 50%;
-            filter: blur(12px);
-            opacity: 0.6;
-            z-index: 1;
-            animation: pulseGlow 4s infinite alternate;
-        }
-
-        .header h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 30px;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, var(--accent-cyan) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
-        }
-
-        .header p {
-            font-size: 13px;
-            color: var(--text-muted);
-            letter-spacing: 0.5px;
-            margin-top: 4px;
-            font-weight: 500;
-        }
-
-        /* --- WARNING BOX --- */
-        .warning-honesty {
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.25);
-            border-radius: 14px;
-            padding: 14px 16px;
-            margin-bottom: 24px;
-            font-size: 12.5px;
-            color: #fde68a;
-            line-height: 1.5;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .warning-honesty strong {
-            color: #fbbf24;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 4px;
-            font-size: 13.5px;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        /* --- FORM ELEMENTS --- */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-        .form-group label span.required {
-            color: #f43f5e;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(6, 9, 19, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #ffffff;
-            font-size: 14px;
-            outline: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: #475569;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--accent-cyan);
-            box-shadow: 
-                0 0 0 3px rgba(6, 182, 212, 0.15),
-                0 0 15px rgba(6, 182, 212, 0.2);
-            background: rgba(6, 9, 19, 0.85);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 95px;
-        }
-
-        /* --- CHECKBOX --- */
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin: 24px 0;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            margin-top: 2px;
-            width: 18px;
-            height: 18px;
-            accent-color: var(--accent-cyan);
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .checkbox-group label {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.5;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .checkbox-group label strong {
-            color: #e2e8f0;
-        }
-
-        /* --- BUTTONS --- */
-        .btn-submit, .btn-next {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--primary-glow) 0%, #4338ca 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-submit:hover:not(:disabled), .btn-next:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
-            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
-        }
-
-        .btn-submit:disabled {
-            background: #1e293b;
-            color: #475569;
-            box-shadow: none;
-            cursor: not-allowed;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* --- RESULT BOXES --- */
-        .result-box {
-            display: none;
-            text-align: center;
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        .notice-card {
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px dashed rgba(245, 158, 11, 0.4);
-            border-radius: 14px;
-            padding: 18px;
-            margin: 20px 0 28px 0;
-            color: #ffffff;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .instruction-box h3 {
-            font-family: 'Outfit', sans-serif;
-            color: #fbbf24;
-            margin-bottom: 12px;
-            font-size: 22px;
-        }
-
-        .success-box h3 {
-            font-family: 'Outfit', sans-serif;
-            color: #34d399;
-            margin-bottom: 12px;
-            font-size: 24px;
-        }
-
-        .rejected-box h3 {
-            font-family: 'Outfit', sans-serif;
-            color: #f43f5e;
-            margin-bottom: 12px;
-            font-size: 22px;
-        }
-
-        .result-box p {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 28px;
-            line-height: 1.6;
-        }
-
-        .btn-discord {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #5865F2 0%, #404EED 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .btn-discord:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(88, 101, 242, 0.6);
-        }
-
-        /* --- ANIMATIONS --- */
-        @keyframes containerAppear {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulseGlow {
-            0% { opacity: 0.4; filter: blur(10px); }
-            100% { opacity: 0.8; filter: blur(16px); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d1b">
+  <title>Pendaftaran Member | Brebes Roblox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#080d1b;--panel:rgba(15,23,42,.88);--line:rgba(148,163,184,.16);--muted:#91a0b8;--text:#f5f8ff;--cyan:#48d9ed;--blue:#6875ff;--purple:#a56bff;--danger:#fb7185;--success:#34d399}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;padding:38px 16px;display:grid;place-items:center;background:radial-gradient(ellipse at 12% 8%,rgba(72,217,237,.13),transparent 32%),radial-gradient(ellipse at 88% 88%,rgba(165,107,255,.15),transparent 34%),linear-gradient(145deg,#070b16,#0b1225 55%,#080d1b);color:var(--text);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(to bottom,black,transparent 90%)}
+    .shell{width:min(100%,610px);position:relative}
+    .topline{height:3px;border-radius:99px;background:linear-gradient(90deg,transparent,var(--cyan),var(--blue),var(--purple),transparent);margin:0 12% -1px;position:relative;z-index:2;box-shadow:0 0 22px rgba(72,217,237,.45)}
+    .panel{position:relative;padding:clamp(24px,5vw,44px);border:1px solid var(--line);border-radius:26px;background:linear-gradient(145deg,rgba(17,27,49,.94),rgba(10,16,32,.94));box-shadow:0 28px 90px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.055);backdrop-filter:blur(18px);animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+    .header{text-align:center;margin-bottom:30px}
+    .logo-wrap{width:92px;height:92px;margin:0 auto 17px;position:relative}
+    .logo-wrap:before{content:"";position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(from 30deg,var(--cyan),var(--blue),var(--purple),var(--cyan));filter:blur(12px);opacity:.55}
+    .logo{position:relative;width:100%;height:100%;object-fit:cover;border-radius:50%;border:2px solid rgba(255,255,255,.32);background:#111a30}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#a5eefa;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:7px 11px;border:1px solid rgba(72,217,237,.2);border-radius:99px;background:rgba(72,217,237,.06);margin-bottom:12px}
+    .pulse{width:6px;height:6px;border-radius:50%;background:var(--success);box-shadow:0 0 10px var(--success)}
+    h1{font:800 clamp(27px,6vw,36px)/1.1 Outfit,sans-serif;letter-spacing:.2px;margin:0;background:linear-gradient(110deg,#fff 15%,#a9eefa 60%,#c8b3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .subtitle{color:var(--muted);font-size:13px;margin:9px 0 0;line-height:1.6}
+    .notice{display:flex;gap:12px;padding:15px 16px;border:1px solid rgba(251,191,36,.2);border-radius:15px;background:rgba(245,158,11,.065);color:#f5d99a;font-size:12px;line-height:1.65;margin-bottom:25px}
+    .notice .symbol{font-size:17px;flex:none}.notice strong{display:block;color:#ffdc8a;font:700 13px Outfit,sans-serif;margin-bottom:3px}
+    .section-label{display:flex;align-items:center;gap:10px;color:#dce8ff;font:700 12px Outfit,sans-serif;letter-spacing:1.1px;text-transform:uppercase;margin:25px 0 15px}
+    .section-label:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,var(--line),transparent)}
+    .field{margin-bottom:17px}.field label{display:block;margin:0 0 8px;color:#c3cde0;font-size:12px;font-weight:700}
+    .required{color:#fb7185}.field input,.field textarea{width:100%;border:1px solid rgba(148,163,184,.18);border-radius:12px;padding:14px 15px;background:rgba(3,8,20,.55);color:#f8fbff;font:500 13px "DM Sans",sans-serif;outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+    .field input::placeholder,.field textarea::placeholder{color:#59677f}.field input:focus,.field textarea:focus{border-color:rgba(72,217,237,.7);background:rgba(3,8,20,.82);box-shadow:0 0 0 3px rgba(72,217,237,.1),0 8px 24px rgba(0,0,0,.12)}
+    .field textarea{min-height:105px;resize:vertical;line-height:1.55}
+    .hint{font-size:10px;color:#77869f;margin-top:6px}
+    .consent{display:flex;align-items:flex-start;gap:11px;padding:15px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);margin:22px 0}
+    .consent input{width:17px;height:17px;margin:2px 0 0;accent-color:var(--cyan);flex:none}
+    .consent label{font-size:11px;color:#aab6ca;line-height:1.6;cursor:pointer}.consent strong{color:#edf5ff}
+    .submit{width:100%;border:0;border-radius:13px;padding:16px 18px;background:linear-gradient(110deg,#4c5cf0,#6575ff 55%,#7c61ed);color:white;font:700 14px Outfit,sans-serif;letter-spacing:.7px;cursor:pointer;box-shadow:0 10px 28px rgba(88,101,242,.27);transition:transform .2s,filter .2s,box-shadow .2s}
+    .submit:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.09);box-shadow:0 14px 32px rgba(88,101,242,.38)}.submit:disabled{opacity:.48;cursor:not-allowed;box-shadow:none}
+    .status{display:none;margin-top:16px;padding:14px;border-radius:12px;font-size:12px;line-height:1.6}.status.show{display:block;animation:rise .35s ease}.status.info{background:rgba(72,217,237,.08);border:1px solid rgba(72,217,237,.22);color:#b9f2fa}.status.error{background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.25);color:#fecdd3}
+    .result{display:none;text-align:center;padding:18px 0 4px;animation:rise .4s ease}.result-icon{font-size:42px;margin-bottom:12px}.result h2{font:700 25px Outfit,sans-serif;margin:0 0 8px}.result p{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 22px}
+    .discord-link{display:block;text-decoration:none;padding:15px;border-radius:12px;background:linear-gradient(110deg,#5865f2,#4752c4);color:#fff;font:700 13px Outfit,sans-serif;box-shadow:0 9px 24px rgba(88,101,242,.25)}
+    .foot{text-align:center;color:#64728a;font-size:10px;margin:19px 0 0;letter-spacing:.3px}
+    .hp{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:480px){body{padding:18px 12px}.panel{border-radius:21px}.logo-wrap{width:78px;height:78px}.notice{font-size:11px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+  </style>
 </head>
 <body>
+  <main class="shell">
+    <div class="topline"></div>
+    <section class="panel">
+      <header class="header">
+        <div class="logo-wrap"><img class="logo" src="BR.png" alt="Logo Brebes Roblox" onerror="this.style.display='none'"></div>
+        <div class="eyebrow"><span class="pulse"></span> Community Registration</div>
+        <h1>Brebes Roblox</h1>
+        <p class="subtitle">Formulir pendaftaran member resmi komunitas</p>
+      </header>
 
-    <div class="container">
-        <!-- HEADER FORM -->
-        <div class="header">
-            <div class="logo-wrapper">
-                <div class="logo-glow"></div>
-                <img src="BR.png" alt="Logo Brebes Roblox" class="logo">
-            </div>
-            <h2>Brebes Roblox</h2>
-            <p>Formulir Pendaftaran Member Resmi</p>
-        </div>
+      <div class="notice">
+        <div class="symbol">⚠️</div>
+        <div><strong>Isi data dengan jujur</strong>Pastikan seluruh informasi, terutama usia dan username, benar. Tim admin akan melakukan verifikasi melalui Discord. Data palsu dapat mengakibatkan pendaftaran dibatalkan.</div>
+      </div>
 
-        <!-- FORM INPUT -->
-        <form id="memberForm">
-            <div class="warning-honesty">
-                <strong>⚠️ HIMBAUAN KEJUJURAN DATA</strong>
-                Harap isi seluruh data (terutama umur & username) dengan jujur. Tim admin akan memverifikasi di Discord. Data palsu dapat mengakibatkan diskualifikasi.
-            </div>
+      <form id="memberForm">
+        <div class="section-label">Informasi pribadi</div>
+        <div class="field"><label for="nama">Nama lengkap <span class="required">*</span></label><input id="nama" name="nama" maxlength="80" placeholder="Masukkan nama asli kamu" autocomplete="name" required></div>
+        <div class="field"><label for="email">Email aktif <span class="required">*</span></label><input id="email" name="email" type="email" maxlength="120" placeholder="nama@email.com" autocomplete="email" required></div>
+        <div class="field"><label for="usia">Usia <span class="required">*</span></label><input id="usia" name="usia" type="number" min="1" max="99" inputmode="numeric" placeholder="Minimal 17 tahun" required><div class="hint">Pendaftaran hanya tersedia untuk usia 17 tahun ke atas.</div></div>
+        <div class="field"><label for="alamat">Asal kecamatan / desa <span class="required">*</span></label><input id="alamat" name="alamat" maxlength="120" placeholder="Contoh: Bulakamba, Brebes" required></div>
 
-            <div class="form-group">
-                <label for="nama">Nama Lengkap <span class="required">*</span></label>
-                <div class="input-wrapper">
-                    <input type="text" id="nama" placeholder="Masukkan nama asli kamu" required autocomplete="off">
-                </div>
-            </div>
+        <div class="section-label">Akun komunitas</div>
+        <div class="field"><label for="discordUsername">Username Discord <span class="required">*</span></label><input id="discordUsername" name="discordUsername" maxlength="80" placeholder="Contoh: username Discord kamu" required></div>
+        <div class="field"><label for="username">Username Roblox <span class="required">*</span></label><input id="username" name="username" maxlength="50" placeholder="Contoh: BrebesGamer123" required></div>
+        <div class="field"><label for="alasan">Alasan bergabung <span class="required">*</span></label><textarea id="alasan" name="alasan" maxlength="1000" placeholder="Ceritakan alasan kamu ingin bergabung dengan Brebes Roblox..." required></textarea></div>
 
-            <div class="form-group">
-                <label for="email">Email Aktif <span class="required">*</span></label>
-                <div class="input-wrapper">
-                    <input type="email" id="email" placeholder="contoh: nama@gmail.com" required autocomplete="off">
-                </div>
-            </div>
+        <div class="hp" aria-hidden="true"><label for="website">Jangan isi kolom ini</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+        <div class="consent"><input type="checkbox" id="agreeHonesty" required><label for="agreeHonesty">Saya menyatakan bahwa data yang saya masukkan adalah <strong>benar dan jujur</strong>, serta saya telah berusia <strong>minimal 17 tahun</strong>.</label></div>
+        <button class="submit" id="submitBtn" type="submit">KIRIM PENDAFTARAN <span aria-hidden="true">→</span></button>
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+      </form>
 
-            <div class="form-group">
-                <label for="discordUsername">Username Discord <span class="required">*</span></label>
-                <div class="input-wrapper">
-                    <input type="text" id="discordUsername" placeholder="Contoh: @eskalatorst_" required autocomplete="off">
-                </div>
-            </div>
+      <section class="result" id="instructionBox">
+        <div class="result-icon">📌</div><h2>Jangan lewatkan langkah ini</h2>
+        <p>Setelah masuk ke server Discord, harap langsung melakukan perkenalan di channel <strong style="color:#48d9ed">#intro</strong> agar admin dapat mengenali kamu.</p>
+        <button class="submit" id="btnNext" type="button">LANJUTKAN KE DISCORD →</button>
+      </section>
+      <section class="result" id="successBox">
+        <div class="result-icon">🎉</div><h2>Pendaftaran terkirim!</h2>
+        <p>Terima kasih telah mendaftar. Silakan bergabung ke server Discord resmi Brebes Roblox dan tunggu verifikasi dari admin.</p>
+        <a class="discord-link" href="https://discord.gg/qXpPg9xPy6" target="_blank" rel="noopener noreferrer">🚀 MASUK DISCORD BREBES ROBLOX</a>
+      </section>
+      <section class="result" id="rejectedBox">
+        <div class="result-icon">🔞</div><h2>Belum memenuhi syarat</h2>
+        <p>Mohon maaf, komunitas Brebes Roblox khusus diperuntukkan bagi calon member berusia minimal 17 tahun.</p>
+      </section>
+      <footer class="foot">BREBES ROBLOX COMMUNITY · MEMBER REGISTRATION</footer>
+    </section>
+  </main>
 
-            <div class="form-group">
-                <label for="username">Username Roblox <span class="required">*</span></label>
-                <div class="input-wrapper">
-                    <input type="text" id="username" placeholder="Contoh: BrebesGamer123" required autocomplete="off">
-                </div>
-            </div>
+  <script>
+    // Endpoint Apps Script boleh terlihat di browser. Token webhook TIDAK boleh diletakkan di sini.
+    const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbziM8gBVnxg2lut64g7yIrS8LFS59yU5n1Fl2U5pjLwDxA7Y4Cpp3fUgmRxI-nYG8Qg/exec";
 
-            <div class="form-group">
-                <label for="usia">Usia (Minimal 17 Tahun) <span class="required">*</span></label>
-                <div class="input-wrapper">
-                    <input type="number" id="usia" min="1" max="99" placeholder="Masukkan usia kamu saat ini" required>
-                </div>
-            </div>
+    const form = document.getElementById("memberForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("status");
+    const instructionBox = document.getElementById("instructionBox");
+    const successBox = document.getElementById("successBox");
+    const rejectedBox = document.getElementById("rejectedBox");
 
-            <div class="form-group">
-                <label for="alamat">Alamat / Asal Kecamatan/desa <span class="required">*</span></label>
-                <div class="input-wrapper">
-                    <input type="text" id="alamat" placeholder="Contoh: Bulakamba, Brebes" required autocomplete="off">
-                </div>
-            </div>
+    function showStatus(message, type) {
+      statusBox.textContent = message;
+      statusBox.className = "status show " + type;
+    }
 
-            <div class="form-group">
-                <label for="alasan">Alasan Join <span class="required">*</span></label>
-                <div class="input-wrapper">
-                    <textarea id="alasan" placeholder="Mengapa kamu berminat bergabung dengan komunitas Brebes Roblox?" required></textarea>
-                </div>
-            </div>
+    function showOnly(section) {
+      form.style.display = "none";
+      instructionBox.style.display = "none";
+      successBox.style.display = "none";
+      rejectedBox.style.display = "none";
+      section.style.display = "block";
+    }
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="agreeHonesty" required>
-                <label for="agreeHonesty">Saya menyatakan bahwa data yang saya masukkan adalah <strong>BENAR & JUJUR</strong> serta saya telah berusia <strong>minimal 17 tahun</strong>.</label>
-            </div>
+    document.getElementById("btnNext").addEventListener("click", () => showOnly(successBox));
 
-            <button type="submit" id="submitBtn" class="btn-submit" disabled>KIRIM PENDAFTARAN</button>
-        </form>
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
 
-        <!-- RESULT 1: INSTRUKSI -->
-        <div id="instructionBox" class="result-box instruction-box">
-            <h3>⚠️ WAJIB DIBACA!</h3>
-            <div class="notice-card">
-                📌 <strong>Setelah masuk server, harap langsung melakukan perkenalan di channel <span style="color: var(--accent-cyan);">#intro</span>.</strong>
-            </div>
-            <button id="btnNext" class="btn-next">SELANJUTNYA ➔</button>
-        </div>
+      const usia = Number(document.getElementById("usia").value);
+      if (!Number.isInteger(usia) || usia < 17 || usia > 99) {
+        showOnly(rejectedBox);
+        return;
+      }
+      if (GOOGLE_APPS_SCRIPT_URL.includes("GANTI_DENGAN")) {
+        showStatus("Admin belum menyelesaikan konfigurasi endpoint pendaftaran. Silakan hubungi admin.", "error");
+        return;
+      }
 
-        <!-- RESULT 2: SUCCESS LINK DISCORD -->
-        <div id="successBox" class="result-box success-box">
-            <h3>🎉 PENDAFTARAN BERHASIL!</h3>
-            <p>Silakan klik tombol di bawah untuk bergabung ke Server Discord resmi Brebes Roblox.</p>
-            <a href="https://discord.gg/qXpPg9xPy6" target="_blank" rel="noopener noreferrer" class="btn-discord">
-                🚀 MASUK DISCORD BREBES ROBLOX
-            </a>
-        </div>
+      const payload = {
+        nama: document.getElementById("nama").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        discordUsername: document.getElementById("discordUsername").value.trim(),
+        username: document.getElementById("username").value.trim(),
+        usia,
+        alamat: document.getElementById("alamat").value.trim(),
+        alasan: document.getElementById("alasan").value.trim(),
+        website: document.getElementById("website").value
+      };
 
-        <!-- RESULT 3: REJECTED -->
-        <div id="rejectedBox" class="result-box rejected-box">
-            <h3>❌ PENDAFTARAN DITOLAK</h3>
-            <p>Mohon maaf, Komunitas Brebes Roblox khusus diperuntukkan bagi member yang berusia <strong>17 tahun ke atas</strong>.</p>
-        </div>
+      submitBtn.disabled = true;
+      submitBtn.textContent = "MENGIRIM PENDAFTARAN...";
+      showStatus("Mengirim data pendaftaran. Jangan tutup halaman ini dulu.", "info");
 
-        <!-- RESULT 4: ALREADY FILLED -->
-        <div id="alreadyFilledBox" class="result-box rejected-box">
-            <h3>⚠️ AKSES DIBATASI</h3>
-            <p>Kamu sudah pernah mengirimkan formulir pendaftaran ini sebelumnya dari perangkat yang sama.</p>
-        </div>
-    </div>
-
-    <script>
-        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1567601182619205722/7uHasAGGca8-fUjJenNd03R9fs_i7oyYFeDrdroyZe4LEisb5T-5yLMQBSbRbXxGf-Wb";
-        
-        // PASTE URL GOOGLE APPS SCRIPT KAMU DI SINI:
-        const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbydiFrmo5wyEmCkUQ5xKhA47O5cixPFhTcMoncW04tWrwe1XAEkUK0gznQT31FT9Phf/exec"
-        const form = document.getElementById('memberForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const agreeCheckbox = document.getElementById('agreeHonesty');
-        const instructionBox = document.getElementById('instructionBox');
-        const btnNext = document.getElementById('btnNext');
-        const successBox = document.getElementById('successBox');
-        const rejectedBox = document.getElementById('rejectedBox');
-        const alreadyFilledBox = document.getElementById('alreadyFilledBox');
-
-        // Toggle submit button state
-        agreeCheckbox.addEventListener('change', function() {
-            submitBtn.disabled = !this.checked;
+      try {
+        // no-cors membuat respons tidak dapat dibaca browser; backend tetap memproses request.
+        // Karena itu UI menyebutnya "terkirim untuk diproses", bukan mengklaim verifikasi server.
+        await fetch(GOOGLE_APPS_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
         });
-
-        // Check submission history
-        window.addEventListener('DOMContentLoaded', () => {
-            const hasSubmitted = localStorage.getItem('brebes_roblox_submitted');
-            if (hasSubmitted) {
-                form.style.display = "none";
-                alreadyFilledBox.style.display = "block";
-            }
-        });
-
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const nama = document.getElementById('nama').value;
-            const email = document.getElementById('email').value;
-            const discordUsername = document.getElementById('discordUsername').value;
-            const username = document.getElementById('username').value;
-            const usia = parseInt(document.getElementById('usia').value, 10);
-            const alamat = document.getElementById('alamat').value;
-            const alasan = document.getElementById('alasan').value;
-
-            if (usia < 17) {
-                form.style.display = "none";
-                localStorage.setItem('brebes_roblox_submitted', 'true');
-                rejectedBox.style.display = "block";
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.innerText = "MENGIRIM...";
-
-            const formDataRaw = { nama, email, discordUsername, username, usia, alamat, alasan };
-
-            // 1. Payload untuk Discord Webhook
-            const discordPayload = {
-                embeds: [{
-                    title: "📥 Pendaftaran Member Baru Brebes Roblox",
-                    color: 6500337,
-                    fields: [
-                        { name: "👤 Nama", value: nama, inline: true },
-                        { name: "📧 Email", value: email, inline: true },
-                        { name: "💬 Username Discord", value: discordUsername, inline: true },
-                        { name: "🎮 Username Roblox", value: username, inline: true },
-                        { name: "🎂 Usia", value: `${usia} Tahun`, inline: true },
-                        { name: "🏠 Alamat", value: alamat, inline: false },
-                        { name: "📝 Alasan Join", value: alasan, inline: false }
-                    ],
-                    timestamp: new Date().toISOString(),
-                    footer: { text: "Brebes Roblox Community System" }
-                }]
-            };
-
-            try {
-                // Kirim data ke Discord & Google Sheets secara bersamaan (Parallel)
-                const [discordRes] = await Promise.all([
-                    fetch(DISCORD_WEBHOOK_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(discordPayload)
-                    }),
-                    // Mode 'no-cors' digunakan agar Google Apps Script tidak terblokir CORS di browser
-                    fetch(GOOGLE_SHEETS_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'text/plain' },
-                        body: JSON.stringify(formDataRaw)
-                    })
-                ]);
-
-                if (discordRes.ok) {
-                    form.style.display = "none";
-                    localStorage.setItem('brebes_roblox_submitted', 'true');
-                    instructionBox.style.display = "block";
-                } else {
-                    alert("Gagal mengirim data ke Discord. Silakan coba lagi!");
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "KIRIM PENDAFTARAN";
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Terjadi kesalahan jaringan.");
-                submitBtn.disabled = false;
-                submitBtn.innerText = "KIRIM PENDAFTARAN";
-            }
-        });
-
-        btnNext.addEventListener('click', function() {
-            instructionBox.style.display = "none";
-            successBox.style.display = "block";
-        });
-    </script>
+        showOnly(instructionBox);
+      } catch (error) {
+        console.error("Submission network error:", error);
+        showStatus("Koneksi gagal. Periksa internet lalu coba kembali. Jika masalah berlanjut, hubungi admin.", "error");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'KIRIM PENDAFTARAN <span aria-hidden="true">→</span>';
+      }
+    });
+  </script>
 </body>
 </html>
